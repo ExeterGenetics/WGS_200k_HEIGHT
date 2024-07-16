@@ -1,0 +1,124 @@
+{
+  "name": "Step2_Burden_Step_WGS_PGEN",
+  "title": "Regenie_Step2",
+  "summary": "Runs a REGENIE WGS Burden Analysis",
+  "dxapi": "1.0.0",
+  "version": "1.0.0",
+  "inputSpec": [
+    {
+      "name": "Phenotype_TSV",
+      "label": "Phentotype File",
+      "class": "file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": "Tab delimited phenotype file, beginning FID IID (both are n_eid with the header changed), followed by the Phenotype column"
+    },
+    {
+      "name": "Covariate_TSV",
+      "label": "Covariates File",
+      "class": "file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": "File containing covariates, beginning FID IID, then (e.g.) Centre Sex Age"
+    },
+     {
+      "name": "conditional",
+      "label": "Conditional SNPs",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": "Tab delimited phenotype file, beginning FID IID (both are n_eid with the header changed), followed by the Phenotype column"
+    },
+    {
+      "name": "type",
+      "label": "Binary OR Continuous",
+      "class": "string",
+      "optional": false,
+      "help": "Is your trait a binary (0 OR 1) or a continuous spectrum?"
+    },
+    {
+      "name": "multistep",
+      "label": "multistep",
+      "class": "array:string",
+      "optional": true,
+      "help": "multistep"
+    },
+    {
+      "name": "invnorm",
+      "label": "Would you like your trait to be inverse normalised: Yes OR No",
+      "class": "string",
+      "optional": false,
+      "help": "REGENIE will apply the inverse normalisation at runtime if this option is checked (Only applicable to Binary Traits)"
+    },
+    {
+      "name": "catvars",
+      "label": "Comma Separated List of Categorical Variables (as they appear in the covariate file)",
+      "class": "string",
+      "optional": false,
+      "help": "Categorical variables such as UKBB centre (binary covariates do not need to be entered here)"
+    },
+    {
+      "name": "chr",
+      "label": "Chromosome Number",
+      "class": "string",
+      "optional": false,
+      "help": "Chromosome Number"
+    },
+    {
+      "name": "chunk_end",
+      "label": "Max bp in chunk",
+      "class": "string",
+      "optional": false,
+      "help": "Max bp in chunk"
+    },
+    {
+      "name": "chunk_start",
+      "label": "Min bp in chunk",
+      "class": "string",
+      "optional": false,
+      "help": "Min bp in chunk"
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "output",
+      "label": "Output String",
+      "class": "string",
+      "help": "Output string"
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "days": 5
+      }
+    },
+    "interpreter": "bash",
+    "release": "20.04",
+    "distribution": "Ubuntu",
+    "file": "src/Regenie_GWAS.sh",
+    "version": "0"
+  },
+  "access": {
+    "project": "CONTRIBUTE",   
+    "allProjects": "VIEW",
+  "network": [
+      "*"
+    ]
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x16"
+        }
+      }
+    }
+  }
+}
